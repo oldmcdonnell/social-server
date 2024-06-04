@@ -20,10 +20,10 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = '__all__'
 
-# If you want to include UserPostSerializer as well
+
 class UserPostSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)  # Including user information
-    images = ImageSerializer(many=True, read_only=True)  # Including related images
+    user = UserSerializer(read_only=True)  
+    images = ImageSerializer(many=True, read_only=True) 
 
     class Meta:
         model = UserPost

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 # from . import views
 from app_social.views import *
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +28,7 @@ urlpatterns = [
     path('posts/create/',create_user_post),
     path('posts/update/<int:post_id>/', update_post, name='update_post'),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
