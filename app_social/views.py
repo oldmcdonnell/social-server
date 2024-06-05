@@ -17,7 +17,7 @@ def get_profile(request):
     serializer = ProfileSerializer(profile)
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST']) 
 @permission_classes([AllowAny])
 def create_user(request):
     user = User.objects.create(
@@ -51,20 +51,35 @@ def get_images(request):
     image_serializer = ImageSerializer(images, many=True)
     return Response(image_serializer.data)
 
+
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_user_post(request):
-    user = request.user
-    data = {
-        'user': user.id,
-        'title': request.data.get('title'),
-        'text': request.data.get('text')
-    }
-    serializer = UserPostSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    print('print user Post ')
+    print('user ino **********************************', request.user)
+    image_id = Image.objects.get(id=request.data['image'])
+    user_post = UserPost.objects.create(
+        user = request.user,
+        title = request.data['title'],
+        text = request.data['text'],
+        image = image_id
+    )
+    # user = request.user
+    # data = {
+    #     'user': user,
+    #     'title': request.data.get('title'),
+    #     'text': request.data.get('text'),
+    #     'image': request.data.get('image')
+    # }
+    # print('user ********************  ', user)
+    # print('data******************* ', data)
+    serializer = UserPostSerializer(user_post)
+    # if serializer.is_valid():
+    # serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

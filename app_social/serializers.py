@@ -22,9 +22,9 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class UserPostSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)  
-    images = ImageSerializer(many=True, read_only=True) 
+    user = UserSerializer()  
+    image = ImageSerializer() 
 
     class Meta:
         model = UserPost
-        fields = ['id', 'user', 'title', 'text', 'created_at', 'images']
+        fields = ['id', 'user', 'title', 'text', 'created_at', 'image']

@@ -19,14 +19,21 @@ from django.urls import path
 # from . import views
 from app_social.views import *
 from django.conf import settings
+from rest_framework_simplejwt.views import (
+  TokenObtainPairView,
+  TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create-image/', create_image),
     path('get-images/', get_images),
     path('profile/', get_profile),
-    path('posts/create/',create_user_post),
+    path('create-user/', create_user),
+    path('posts/create/', create_user_post),
     path('posts/update/<int:post_id>/', update_post, name='update_post'),
+    path('refresh/', TokenRefreshView.as_view()),
+    path('token/', TokenObtainPairView.as_view()),
 ]
 
 if settings.DEBUG:
