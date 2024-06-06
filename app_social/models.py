@@ -10,7 +10,7 @@ class Image(models.Model):
         return self.title if self.title else "Untitled Image"
 
 class UserPost(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post', null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
     text = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)

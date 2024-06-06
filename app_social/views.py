@@ -5,7 +5,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-
+from datetime import datetime
 from .models import Profile, Image, UserPost
 from .serializers import ProfileSerializer, ImageSerializer, UserPostSerializer
 
@@ -64,7 +64,8 @@ def create_user_post(request):
         user = request.user,
         title = request.data['title'],
         text = request.data['text'],
-        image = image_id
+        image = image_id,
+        created_at = datetime.now()
     )
     # user = request.user
     # data = {
@@ -90,3 +91,11 @@ def update_post(request, post_id):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_posts(request):
+    posts = UserPost.objects.all()  # Optionally, filter images by user or other criteria
+    post_serializer = UserPostSerializer(posts, many=True)
+    return Response(post_serializer.data)

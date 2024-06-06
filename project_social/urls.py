@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('create-image/', create_image),
     path('get-images/', get_images),
+    path('get-posts/', get_posts),
     path('profile/', get_profile),
     path('create-user/', create_user),
     path('posts/create/', create_user_post),
