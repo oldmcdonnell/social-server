@@ -1,3 +1,5 @@
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes, parser_classes
@@ -96,6 +98,33 @@ def update_post(request, post_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_posts(request):
-    posts = UserPost.objects.all()  # Optionally, filter images by user or other criteria
+    posts = UserPost.objects.all()
     post_serializer = UserPostSerializer(posts, many=True)
     return Response(post_serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_own_posts(request):
+    posts = UserPost.objects.filter(user = request.user)
+    post_serializer = UserPostSerializer(posts, many=True)
+    return Response(post_serializer.data)
+
+
+@api_view(['GET', 'PUT', 'POST', 'DELETE'])
+@permission_classes([IsAuthenticated])
+class UserPostViewSet(viewsets.ModelViewSet):
+    queryset = UserPost.objects.all()
+    serializer_class = UserPostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_post(request):
+    post = UserPost.objects.get(id=request.data['id'])
+    post.delete()
+    return Response()
+
