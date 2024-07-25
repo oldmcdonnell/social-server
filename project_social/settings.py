@@ -96,7 +96,7 @@ CORS_ALLOW_HEADERS = [
     'Authorization',
 ]
 
-CORS_ALLOW_CREDENTIALS = True #added this part 
+CORS_ALLOW_CREDENTIALS = True #added this part
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
