@@ -49,7 +49,7 @@ def create_image(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_images(request):
-    images = Image.objects.all()  # Optionally, filter images by user or other criteria
+    images = Image.objects.all().order_by('-created_at')
     image_serializer = ImageSerializer(images, many=True)
     return Response(image_serializer.data)
 
@@ -98,14 +98,14 @@ def update_post(request, post_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_posts(request):
-    posts = UserPost.objects.all()
+    posts = UserPost.objects.all().order_by('-created_at')
     post_serializer = UserPostSerializer(posts, many=True)
     return Response(post_serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_own_posts(request):
-    posts = UserPost.objects.filter(user = request.user)
+    posts = UserPost.objects.filter(user = request.user).order_by('-created_at')
     post_serializer = UserPostSerializer(posts, many=True)
     return Response(post_serializer.data)
 

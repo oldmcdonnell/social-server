@@ -6,12 +6,12 @@ class ProfileAdmin(admin.ModelAdmin):
   pass
 
 
-class ImageAdmin(admin.ModelAdmin):
+class VoteAdmin(admin.ModelAdmin):
   pass
 
-class UserPostAdmin(admin.ModelAdmin):
+class FriendsGroup(admin.ModelAdmin):
   pass
 
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Image, ImageAdmin)
-admin.site.register(UserPost, UserPostAdmin)
+admin.site.register(Image, VoteAdmin)
+admin.site.register(UserPost, FriendsGroup)
