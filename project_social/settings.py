@@ -23,12 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z8)ih*=vu0xexazyfoa&!15=2b+yv6vrd43*!r+dp$fxacrwo0'
+SECRET_KEY = os.getenv('SECRET_KEY', 'a default-value for local dev')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
+
+DEBUG = False
+if ENVIRONMENT == 'local':
+    DEBUG = True
 
 # Application definition
 
@@ -49,7 +52,10 @@ APP_NAME = os.getenv("FLY_APP_NAME", None)
 
 DATABASE_PATH = os.getenv("DATABASE_PATH", None)
 
-CSRF_TRUSTED_ORIGINS = [f"https://{APP_NAME}.fly.dev"]
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{APP_NAME}.fly.dev",
+    'https://art-social-seven.vercel.app'
+    ]
 
 ALLOWED_HOSTS = ['127.0.0.1', f"{APP_NAME}.fly.dev"]
 
@@ -155,8 +161,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project_social.wsgi.application'
-
-SECRET_KEY = os.getenv('SECRET_KEY', 'a default-value for local dev')
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
