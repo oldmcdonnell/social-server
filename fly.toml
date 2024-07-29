@@ -13,8 +13,9 @@ console_command = '/code/manage.py shell'
   PORT = '8000'
 
 [[mounts]]
-  source = 'database_volume'
-  destination = '/mnt/volume_mount'
+source = 'database_volume'
+destination = '/mnt/volume_mount'
+
 
 [http_service]
   internal_port = 8000
@@ -30,5 +31,5 @@ console_command = '/code/manage.py shell'
   cpus = 1
 
 [[statics]]
-  guest_path = '/mnt/volume_mount/media'
-  url_prefix = '/media/'
+guest_path = '/mnt/volume_mount/media'
+url_prefix = '/media/'
