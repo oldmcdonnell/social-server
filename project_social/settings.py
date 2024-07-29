@@ -35,6 +35,16 @@ if ENVIRONMENT == 'local':
 
 # Application definition
 
+
+# MEDIA_URL = '/images/'
+# MEDIA_ROOT = BASE_DIR / 'images'
+# if ENVIRONMENT == 'production':
+#     MEDIA_ROOT = '/mnt/volume_mount/'
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = BASE_DIR
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -171,11 +181,6 @@ DATABASES = {
         'NAME': DATABASE_PATH if APP_NAME else BASE_DIR / 'db.sqlite3',
     }
 }
-
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# if APP_NAME:
-#   MEDIA_ROOT = '/mnt/volume_mount/media/'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
