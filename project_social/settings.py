@@ -172,10 +172,12 @@ DATABASES = {
     }
 }
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# if APP_NAME:
-#   MEDIA_ROOT = '/mnt/volume_mount/media/'
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+if ENVIRONMENT == 'production':
+    MEDIA_ROOT = '/mnt/volume_mount/media/'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
