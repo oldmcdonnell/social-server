@@ -30,8 +30,8 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'a default-value for local dev')
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
 
 DEBUG = False
-# if ENVIRONMENT == 'local':
-#     DEBUG = True
+if ENVIRONMENT == 'local':
+    DEBUG = True
 
 # Application definition
 
