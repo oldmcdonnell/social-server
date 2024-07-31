@@ -52,8 +52,6 @@ APP_NAME = os.getenv("FLY_APP_NAME", None)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-if APP_NAME:
-    MEDIA_ROOT = '/mnt/volume_mount/media/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
