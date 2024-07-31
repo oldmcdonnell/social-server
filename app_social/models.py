@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Image(models.Model):
     title = models.TextField()
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='media/')
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

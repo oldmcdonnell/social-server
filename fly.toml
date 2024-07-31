@@ -32,4 +32,4 @@ console_command = "/code/manage.py shell"
 
 [[statics]]
   guest_path = "/mnt/volume_mount/media"
-  url_prefix = "/images/"
+  url_prefix = "/media/"

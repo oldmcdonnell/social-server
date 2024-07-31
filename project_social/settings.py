@@ -36,14 +36,24 @@ if ENVIRONMENT == 'local':
 # Application definition
 
 
-# MEDIA_URL = '/images/'
-# MEDIA_ROOT = BASE_DIR / 'images'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 # if ENVIRONMENT == 'production':
 #     MEDIA_ROOT = '/mnt/volume_mount/'
 
-MEDIA_URL = '/images/'
-MEDIA_ROOT = BASE_DIR
 
+# MEDIA_ROOT = BASE_DIR
+# if ENVIRONMENT == 'production':
+#     MEDIA_URL = ''
+# else:
+#     MEDIA_URL = '/media/'
+
+APP_NAME = os.getenv("FLY_APP_NAME", None)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if APP_NAME:
+    MEDIA_ROOT = '/mnt/volume_mount/media/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,7 +68,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
 ]
 
-APP_NAME = os.getenv("FLY_APP_NAME", None)
+
 
 DATABASE_PATH = os.getenv("DATABASE_PATH", None)
 
@@ -211,7 +221,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, media)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
